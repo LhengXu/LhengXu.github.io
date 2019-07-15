@@ -1,15 +1,100 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on Bubble</title>
     <link>https://LhengXu.github.io/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on Bubble</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jul 2019 22:10:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jul 2019 23:33:04 +0800</lastBuildDate>
     
 	<atom:link href="https://LhengXu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SpringBoot入门</title>
+      <link>https://LhengXu.github.io/post/spring-boot/</link>
+      <pubDate>Mon, 15 Jul 2019 23:33:04 +0800</pubDate>
+      
+      <guid>https://LhengXu.github.io/post/spring-boot/</guid>
+      <description>一、**Spring Boot 入门 1、Spring Boot 简介  简化Spring应用开发的一个框架；
+整个Spring技术栈的一个大整合；
+J2EE开发的一站式解决方案；
+ 2、微服务 2014，martin fowler
+微服务：架构风格（服务微化）
+一个应用应该是一组小型服务；可以通过HTTP的方式进行互通；
+单体应用：ALL IN ONE
+微服务：每一个功能元素最终都是一个可独立替换和独立升级的软件单元；
+详细参照微服务文档
+3、环境准备 http://www.gulixueyuan.com/ 谷粒学院
+环境约束
+–jdk1.8：Spring Boot 推荐jdk1.7及以上；java version &amp;ldquo;1.8.0_112&amp;rdquo;
+–maven3.x：maven 3.3以上版本；Apache Maven 3.3.9
+–IntelliJIDEA2017：IntelliJ IDEA 2017.2.2 x64、STS
+–SpringBoot 1.5.9.RELEASE：1.5.9；
+统一环境；
+1、MAVEN设置； 给maven 的settings.xml配置文件的profiles标签添加
+&amp;lt;profile&amp;gt; &amp;lt;id&amp;gt;jdk-1.8&amp;lt;/id&amp;gt; &amp;lt;activation&amp;gt; &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt; &amp;lt;jdk&amp;gt;1.8&amp;lt;/jdk&amp;gt; &amp;lt;/activation&amp;gt; &amp;lt;properties&amp;gt; &amp;lt;maven.compiler.source&amp;gt;1.8&amp;lt;/maven.compiler.source&amp;gt; &amp;lt;maven.compiler.target&amp;gt;1.8&amp;lt;/maven.compiler.target&amp;gt; &amp;lt;maven.compiler.compilerVersion&amp;gt;1.8&amp;lt;/maven.compiler.compilerVersion&amp;gt; &amp;lt;/properties&amp;gt; &amp;lt;/profile&amp;gt;  2、IDEA设置 整合maven进来；
+4、Spring Boot HelloWorld 一个功能：
+浏览器发送hello请求，服务器接受请求并处理，响应Hello World字符串；
+1、创建一个maven工程；（jar） 2、导入spring boot相关的依赖 &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring学习笔记</title>
+      <link>https://LhengXu.github.io/post/spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 15 Jul 2019 23:20:04 +0800</pubDate>
+      
+      <guid>https://LhengXu.github.io/post/spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>Spring学习笔记 一、Spring入门案例  通过Idea创建maven项目 配置spring配置文件ApplicationContext.xml 编写接口及实现类 IaccountDao
+```java /**
+ 账户的持久层接口 */ public interface IAccountDao {
+/**
+ 模拟保存账户 */ void saveAccount(); }
+ - IaccountService ```java /** * 账户业务层的接口 */ public interface IAccountService { /** * 模拟保存账户 */ void saveAccount(); }      AccountDaoImpl
+```java /**
+ 账户的持久层实现类 */ public class AccountDaoImpl implements IAccountDao {
+public void saveAccount(){
+System.out.println(&amp;quot;保存了账户&amp;quot;);  } }
+ - AccountServiceImpl ```java /** * 账户的业务层实现类 */ public class AccountServiceImpl implements IAccountService { private IAccountDao accountDao = new AccountDaoImpl(); public void saveAccount(){ accountDao.</description>
+    </item>
+    
+    <item>
+      <title>计算机网络</title>
+      <link>https://LhengXu.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Mon, 15 Jul 2019 23:14:04 +0800</pubDate>
+      
+      <guid>https://LhengXu.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+      <description>第 1 章 概述 1.分组交换 “交换”：转接——把一条电话线转接到另一条电话线，使它们连通起来
+从通信资源的分配角度来看，“交换”就是按照某种方式动态地分配传输线路的资源。
+电路交换必定是面向连接的。
+电路交换的三个阶段：建立连接、通信、释放连接
+电路交换传送计算机数据效率低 ：计算机数据具有突发性 这导致通信线路的利用率很低。
+分组交换的原理：
+1.在发送端，先把较长的报文划分成较短的、固定长度的数据段
+2.每一个数据段前面添加上首部构成分组
+3.l分组交换网以“分组”作为数据传输单元，依次把各分组发送到接收端（假定接收端在左边）
+分组首部的重要性：
+每一个分组的首部都含有地址等控制信息。
+分组交换网中的结点交换机根据收到的分组的首部中的地址信息，把分组转发到下一个结点交换机。
+用这样的存储转发方式，最后分组就能到达最终目的地。
+4.接收端收到分组后剥去首部还原成报文
+5.最后，在接收端把收到的数据恢复成为原来的报文
+分组交换的优点：
+高效 动态分配传输带宽，对通信链路是逐段占用。
+灵活 以分组为传送单位和查找路由。
+迅速 不必先建立连接就能向其他主机发送分组；充分使用链路的带宽。
+可靠 完善的网络协议；自适应的路由选择协议使网络有很好的生存性
+2.计算机网络分类 从网络的交换功能分类：电路交换、报文交换、分组交换、混合交换
+从网络的作用范围进行分类：广域网 WAN、局域网 LAN 、城域网 MAN 、接入网 AN
+广域网、城域网、接入网以及局域网的关系：
+从网络的使用者进行分类：公用网、专用网
+3.计算机网络的主要性能指标 “带宽”(bandwidth)本来是指信号具有的频带宽度，单位是赫（或千赫、兆赫、吉赫等）。
+现在“带宽”是数字信道所能传送的“最高数据率”的同义语，单位是“比特每秒”，或 b/s (bit/s)。
+更常用的带宽单位是：千比每秒，即 kb/s （103 b/s）、兆比每秒，即 Mb/s（106 b/s）
+​ 吉比每秒，即 Gb/s（109 b/s）、太比每秒，即 Tb/s（1012 b/s）
+​ 请注意：在计算机界，K = 210 = 1024 M = 220, G = 230, T = 240。</description>
+    </item>
     
     <item>
       <title>Blog</title>
