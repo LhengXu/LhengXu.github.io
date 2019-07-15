@@ -1,0 +1,1803 @@
+<!doctype html>
+<html ⚡ lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+
+    
+    
+
+    
+    <title>Blog</title>
+
+    
+    
+
+
+
+  
+  
+  <meta name="author" content="" />
+  <meta name="description" content="SSM CRUD 一.基础环境搭建 1.创建maven工程 &amp;lt;dependencies&amp;gt; &amp;lt;!--引入pageHelper分页插件 --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.github.pagehelper&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;pagehelper&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;5.0.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- MBG --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.mybatis.generator&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mybatis-generator-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-webmvc&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.3.7.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- 返回json字符串的支持 --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-databind&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.8.8&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--JSR303数据校验支持；tomcat7及以上的服务器， tomcat7以下的服务器：el表达式。额外给服务器的lib包中替换新的标准的el --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hibernate-validator&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;5.4.1.Final&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- Spring-Jdbc --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-jdbc&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.3.7.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--Spring-test --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-test --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.">
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Blog" />
+    <meta name="twitter:description" content="SSM CRUD 一.基础环境搭建 1.创建maven工程 &amp;lt;dependencies&amp;gt; &amp;lt;!--引入pageHelper分页插件 --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.github.pagehelper&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;pagehelper&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;5.0.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- MBG --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.mybatis.generator&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mybatis-generator-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-webmvc&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.3.7.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- 返回json字符串的支持 --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.fasterxml.jackson.core&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jackson-databind&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.8.8&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--JSR303数据校验支持；tomcat7及以上的服务器， tomcat7以下的服务器：el表达式。额外给服务器的lib包中替换新的标准的el --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;hibernate-validator&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;5.4.1.Final&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- Spring-Jdbc --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-jdbc&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.3.7.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--Spring-test --&amp;gt; &amp;lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-test --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-test&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4." />
+    <meta name="twitter:image" content="https://LhengXu.github.io/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6">
+
+
+<link rel="canonical" href="https://LhengXu.github.io/post/ssmcrud/">
+<link rel="alternative" href="/index.xml" title="My New Hugo Site" type="application/atom+xml">
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+<link rel="icon" href="/img/favicon.ico" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/avatar.jpg">
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+<style amp-custom>/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}code,kbd,samp{font-family:monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}[hidden],template{display:none}body{font-size:18px;font-weight:300;line-height:1.618;font-family:Roboto,sans-serif;color:#777;background:#fff;text-rendering:optimizeLegibility;-webkit-overflow-scrolling:touch}a{color:#3f9adc;text-decoration:none;font-weight:600}a:focus,a:hover{opacity:.7;outline:none}amp-img{margin:0 auto;box-shadow:2px 20px 40px 10px rgba(0,0,0,.15)}button:hover{cursor:pointer}.main{margin-left:20rem;padding:1rem 2rem;max-width:100%;min-height:100vh;box-sizing:border-box}@media screen and (max-width:1440px){.main{width:calc(100% - 20rem)}}@media (min-width:800px) and (max-width:960px){.main{margin-left:15rem;width:calc(100% - 15rem)}}@media screen and (max-width:800px){.main{margin-left:0;padding:0 1rem 1rem;width:100%;min-height:0;border-left:none;border-right:none;border-top:1px solid #ddd;border-bottom:1px solid #ddd}}.footer{display:none}@media screen and (max-width:800px){.footer{display:block;padding:1rem;font-size:.8rem;text-align:center;font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace}}.icon{font-style:normal;text-decoration:inherit;width:1em;height:1em;font-variant:normal;text-transform:none;line-height:1em}.icon,.share{display:inline-block;text-align:center}.share{font-weight:400;margin-left:.2rem;border:none;outline:none;color:#fff;width:30px;height:30px;border-radius:50%}.share-twitter{background-color:#55acee}.share-twitter-icon{margin:5px 0 0 1px}.share-facebook{background-color:#3b5998}.share-google{background-color:#dd4b39}.header{position:fixed;left:0;top:0;bottom:0;width:20rem;padding:1rem;box-sizing:border-box;text-align:center;background-color:rgba(106,172,14,.9)}@media screen and (max-width:800px){.header{width:100%;position:relative}}@media (min-width:800px) and (max-width:960px){.header{width:15rem}}.logo{margin-top:3rem;border-radius:20%;border:4px solid #fff;transition:all .5s ease-out}.logo:hover{border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.3)}@media screen and (max-width:800px){.logo{position:absolute;top:1rem;left:1rem;width:2rem;height:2rem;margin-top:0;border:2px solid #fff}}.title{font-size:1.5rem;font-family:Roboto,sans-serif;font-weight:600;margin:1rem auto}@media screen and (max-width:800px){.title{margin:0 auto}}.subtitle,.title a{color:#fff}.subtitle{margin-bottom:1rem;opacity:.8}.menu{display:none}@media screen and (min-width:800px){.menu{display:block}}.menu-list{list-style:none;padding:0}.menu-item{padding:1rem 0}.menu-item a{font-weight:100;opacity:.8;color:#fff}.menu-item a:focus,.menu-item a:hover{opacity:1}.menu-item.is-active a{color:#444;opacity:1;font-weight:700}.menu-toggle{border:none;outline:none;font-size:2rem;background-color:transparent;color:#fff;position:absolute;top:1rem;right:1rem}@media screen and (min-width:800px){.menu-toggle{display:none}}.sidebar{background-color:#fff;width:100vw}@media screen and (min-width:640px){.sidebar{width:50vw}}.sidebar-list{list-style:none;padding:0;margin:0}.sidebar-menu{text-align:right;padding:16px}.sidebar-item{font-size:2rem;padding:30px 35px 30px 25px;border-top:1px solid #ddd}.sidebar-item:hover{background-color:#f2f2f2}.sidebar-icon{border:none;outline:none;background-color:transparent;font-family:Roboto,sans-serif;font-weight:100;font-size:2rem}.sidebar-link{color:#000;font-weight:100}.social-list{margin:0;padding:0;list-style:none}@media screen and (min-width:800px){.social-list{position:absolute;bottom:10px;left:0;right:0}}.social-item{display:inline-block;margin:0 .2rem}.social-item a{color:#fff;font-weight:400}.entry-list{background-color:#f2f2f2}@media screen and (max-width:800px){.entry-list{padding-top:30px}}.entry-single{line-height:1.8;margin-bottom:22px;background-color:#fff;box-shadow:0 0 2px 0 rgba(137,146,177,.15),0 3px 10px 0 rgba(137,146,177,.1);border-radius:5px}.entry-single:hover{box-shadow:0 1px 15px 0 rgba(137,146,177,.15),0 10px 20px 0 rgba(137,146,177,.15)}.entry-cover{max-width:100%;border-radius:5px 5px 0 0;-o-object-fit:cover;object-fit:cover;box-shadow:none}.entry-title{margin:0;padding:20px 30px 0}.entry-link{font-size:1.5rem;font-weight:600;color:#262626}.entry-summary{padding:0 30px;text-align:justify;max-height:4rem;overflow:hidden}.entry-footer{margin:0 30px;padding:10px 0;border-top:1px solid #ddd;display:flex;justify-content:space-between}.entry-meta{margin:0;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}.entry-time{color:#444}.entry-time:after{content:"";border-right:1px solid #ddd;margin:0 8px 0 10px}.pagination{display:flex;justify-content:flex-start}.pagination-btn{color:#777;padding:.8rem;background-color:#fff;border:1px solid #ddd;font-size:.8rem;text-transform:uppercase;border-radius:5px}.pagination-btn:focus,.pagination-btn:hover{color:#fff;background-color:#6aac0e;border-color:#6aac0e}.pagination-next{margin-left:auto}.post-header:after{display:block;content:"";border-bottom-width:3px;border-bottom-style:solid;width:60px;padding-top:10px;border-bottom-color:#6aac0e}.post-title{font-size:2rem;color:#262626;line-height:1.5;margin-top:1.5rem;margin-bottom:.5rem}.post-footer{margin:1rem 0;line-height:1.8}.post-tags{margin-top:0;margin-bottom:1rem;padding-left:0}.post-tag{display:inline-block;margin:0 .5rem 0 0;border-radius:3px;padding:5px 10px;background:#f2f2f2;font-size:.8rem}.post-tag:hover{background:#ddd;box-shadow:0 1px 15px 0 rgba(137,146,177,.15),0 10px 20px 0 rgba(137,146,177,.15)}.post-content{line-height:1.8}.post-content h1,.post-content h2,.post-content h3,.post-content h4,.post-content h5,.post-content h6{color:#6cb505;font-weight:700;line-height:1.125}.post-content h1{margin-top:2rem;margin-bottom:1rem;font-size:2rem}.post-content h2{margin-top:1.75rem;margin-bottom:.75rem;font-size:1.5rem}.post-content h3{margin-top:1.5rem;margin-bottom:.5rem;font-size:1.25rem}.post-content h4{margin-top:1.25rem;margin-bottom:.25rem;font-size:1rem}.post-content h5,.post-content h6{margin-top:1rem;margin-bottom:0;font-size:.8rem}.post-content li+li{margin-top:.5rem}.post-content em{color:#777;font-style:italic}.post-content strong{color:#444}.post-content del{color:#777;text-decoration:line-through}.post-content ins{color:#444;text-decoration:underline}.post-content hr{position:relative;margin:2rem auto;border-top:1px dashed #ddd;border-bottom:none}.post-content hr:before{content:"sep line";position:absolute;top:-12px;left:calc(50% - 40px);padding:0 .5rem;background-color:#fff;color:#ddd;font-size:.8rem;font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace}.post-content p{margin-top:1.5rem;margin-bottom:1.5rem;text-align:justify}.post-content blockquote{background-color:#f2f2f2;border-left:5px solid #ddd;padding:.5rem 1rem;margin:2rem 0}.post-content blockquote p{margin-top:.5rem;margin-bottom:.5rem}.post-content blockquote cite{margin-top:1.5rem;color:#777;font-size:.9rem}.post-content code,.post-content tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:.9em;background-color:#ddd;font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace}.post-content code:after,.post-content code:before,.post-content tt:after,.post-content tt:before{letter-spacing:-.2em;content:"\00a0"}.post-content kbd{display:inline-block;padding:.25em;background-color:#f2f2f2;border:1px solid #ddd;border-bottom-color:#ddd;border-radius:3px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.05);font-size:.8em;line-height:1.25;font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace;color:#777}.post-content pre{margin:2rem auto;padding:1rem;overflow-x:auto;border-radius:3px;font-size:.9rem;line-height:1.618;white-space:pre;word-wrap:normal;word-break:normal;background:#ddd;color:#777}.post-content pre code{font-size:.9rem;background-color:transparent}.post-content pre code:after,.post-content pre code:before{content:none}.post-content sub,.post-content sup{font-size:.8rem}.post-content sub a,.post-content sub a:focus,.post-content sub a:hover,.post-content sup a,.post-content sup a:focus,.post-content sup a:hover{border-bottom:none}.post-content ol{margin-left:0;margin-top:2rem;margin-bottom:2rem;padding-left:1.5rem;list-style:decimal outside}.post-content ol ol{margin-top:.5rem;margin-bottom:.5rem;list-style:lower-roman outside}.post-content ol ul{margin-top:.5rem;margin-bottom:.5rem;list-style:disc outside}.post-content ul{margin-left:0;margin-top:2rem;margin-bottom:2rem;padding-left:1.5rem;list-style:disc outside}.post-content ul ul{margin-top:.5rem;margin-bottom:.5rem;list-style:circle outside}.post-content ul ol{margin-top:.5rem;margin-bottom:.5rem;list-style:decimal outside}.post-content dl{margin-top:2rem;margin-bottom:2rem}.post-content dl dt{color:#6aac0e;margin-top:1rem}.post-content dl dt:after{content:":"}.post-content dl dd{text-indent:2rem;margin-left:0;margin-top:.25rem}.post-content figure{display:block;margin:2rem auto}.post-content figure img{max-width:100%;box-shadow:2px 20px 40px 10px rgba(0,0,0,.15)}@media screen and (max-width:800px){.post-content figure img{box-shadow:none}}.post-content figure figcaption h4{color:#ddd;font-size:.9rem;text-align:center}table{background-color:#f2f2f2;color:#444;margin:2rem auto;width:100%;border-collapse:collapse;border-radius:5px}table td,table th{border:1px solid #ddd;border-width:0 0 1px;padding:.5em .75em;vertical-align:center}table th{color:#444}table tr:hover{background-color:#ddd}table thead td,table thead th{border-width:0 0 2px;color:#777}table tfoot td,table tfoot th{border-width:2px 0 0;color:#777}table tbody tr:last-child td,table tbody tr:last-child th{border-bottom-width:0}table tr:first-child th:first-child{border-top-left-radius:5px}table tr:first-child th:last-child{border-top-right-radius:5px}table tr:last-child td:first-child{border-bottom-left-radius:5px}table tr:last-child td:last-child{border-bottom-right-radius:5px}.not-found{margin:5rem auto 0;font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace;text-align:center}.error-emoji{color:#444;font-size:3rem}.error-text{font-size:1.25rem}.error-link{margin-top:2rem;font-size:1rem;color:#6aac0e}</style>
+
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-rss" viewBox="0 0 24 24">
+    <title>RSS</title>
+    <path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-email" viewBox="0 0 24 24">
+    <title>Email</title>
+    <path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.387l-9 6.463-9-6.463V21H1.5C.649 21 0 20.35 0 19.5v-15c0-.425.162-.8.431-1.068C.7 3.16 1.076 3 1.5 3H2l10 7.25L22 3h.5c.425 0 .8.162 1.069.432.27.268.431.643.431 1.068z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-twitter" viewBox="0 0 24 24">
+    <title>Twitter</title>
+    <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-github" viewBox="0 0 24 24">
+    <title>GitHub</title>
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-dribbble" viewBox="0 0 24 24">
+    <title>Dribbble</title>
+    <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-linkedin" viewBox="0 0 24 24">
+    <title>LinkedIn</title>
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-facebook" viewBox="0 0 60 60">
+    <title>Facebook</title>
+    <path d="M42.8,23.8h-7.4v-4.8c0-1.8,1.2-2.2,2.1-2.2c0.8,0,5.2,0,5.2, 0v-8l-7.2,0c-8,0-9.8,6-9.8,9.8v5.3 h-4.6V32h4.6c0,10.6,0,23.3,0,23.3h9.7c0,0,0-12.9,0-23.3H42L42.8,23.8z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <title>Instagram</title>
+    <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-youtube" viewBox="0 0 24 24">
+    <title>YouTube</title>
+    <path class="a" d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-googleplus" viewBox="0 0 24 24">
+    <title>Google+</title>
+    <path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.331 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.122-4.822 4.728-4.822 1.485 0 2.479.633 3.045 1.178l2.073-1.994c-1.33-1.245-3.056-1.995-5.115-1.995C3.412 4.365 0 7.785 0 12s3.414 7.635 7.635 7.635c4.41 0 7.332-3.098 7.332-7.461 0-.501-.054-.885-.12-1.265H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.184v2.184h2.189V13.09H24" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-pinterest" viewBox="0 0 24 24">
+    <title>Pinterest</title>
+    <path d="M8.134 18.748c0-1.6.2-3 .8-4.4.5-1.4 1.2-2.6 2.2-3.6.9-1 2-1.9 3.2-2.6 1.2-.8 2.5-1.3 3.9-1.7 1.5-.4 2.9-.5 4.4-.5 2.2 0 4.3.4 6.2 1.4 1.9.9 3.5 2.3 4.7 4.1 1.2 1.9 1.8 3.9 1.8 6.2 0 1.4-.1 2.7-.4 4-.2 1.3-.7 2.6-1.2 3.8-.6 1.2-1.3 2.3-2.2 3.2-.8.9-1.8 1.7-3.1 2.2-1.2.6-2.5.9-4 .9-1 0-1.9-.3-2.9-.7-.9-.5-1.6-1.1-2-1.9-.1.5-.3 1.4-.6 2.4-.3 1.1-.4 1.7-.5 2-.1.3-.2.9-.4 1.6-.3.7-.4 1.2-.6 1.5-.1.3-.4.7-.7 1.3-.3.6-.6 1.2-1 1.7-.3.5-.7 1.1-1.3 1.8l-.3.1-.2-.2c-.2-2.2-.3-3.6-.3-4 0-1.3.2-2.8.5-4.4.3-1.7.8-3.7 1.4-6.2.6-2.5 1-3.9 1.1-4.4-.5-.9-.7-2.1-.7-3.6 0-1.2.4-2.3 1.1-3.3.8-1.1 1.7-1.6 2.8-1.6.9 0 1.6.3 2.1.9.4.6.7 1.3.7 2.2 0 .9-.3 2.3-1 4.1-.6 1.8-.9 3.1-.9 4 0 .9.3 1.6 1 2.2.6.6 1.4.9 2.3.9.8 0 1.5-.2 2.2-.5.6-.4 1.2-.9 1.6-1.5.5-.6.9-1.3 1.2-2 .4-.8.6-1.5.8-2.4.2-.8.4-1.6.5-2.4.1-.7.1-1.4.1-2.1 0-2.5-.8-4.4-2.3-5.8-1.6-1.4-3.6-2.1-6.1-2.1-2.8 0-5.2 1-7.1 2.8-1.9 1.9-2.9 4.2-2.9 7.1 0 .6.1 1.2.3 1.8.2.6.4 1.1.6 1.4.2.3.4.7.5 1 .2.3.3.5.3.6 0 .4-.1.9-.3 1.6-.2.6-.5 1-.8 1 0 0-.1-.1-.4-.1-.7-.2-1.3-.6-1.9-1.2-.5-.6-1-1.3-1.3-2-.3-.8-.5-1.6-.7-2.4-.2-.7-.2-1.5-.2-2.2z" />
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-reddit" viewBox="0 0 24 24">
+    <title>Reddit icon</title>
+    <path d="M2.204 14.049c-.06.276-.091.56-.091.847 0 3.443 4.402 6.249 9.814 6.249 5.41 0 9.812-2.804 9.812-6.249 0-.274-.029-.546-.082-.809l-.015-.032c-.021-.055-.029-.11-.029-.165-.302-1.175-1.117-2.241-2.296-3.103-.045-.016-.088-.039-.126-.07-.026-.02-.045-.042-.067-.064-1.792-1.234-4.356-2.008-7.196-2.008-2.815 0-5.354.759-7.146 1.971-.014.018-.029.033-.049.049-.039.033-.084.06-.13.075-1.206.862-2.042 1.937-2.354 3.123 0 .058-.014.114-.037.171l-.008.015zm9.773 5.441c-1.794 0-3.057-.389-3.863-1.197-.173-.174-.173-.457 0-.632.176-.165.46-.165.635 0 .63.629 1.685.943 3.228.943 1.542 0 2.591-.3 3.219-.929.165-.164.45-.164.629 0 .165.18.165.465 0 .645-.809.808-2.065 1.198-3.862 1.198l.014-.028zm-3.606-7.573c-.914 0-1.677.765-1.677 1.677 0 .91.763 1.65 1.677 1.65s1.651-.74 1.651-1.65c0-.912-.739-1.677-1.651-1.677zm7.233 0c-.914 0-1.678.765-1.678 1.677 0 .91.764 1.65 1.678 1.65s1.651-.74 1.651-1.65c0-.912-.739-1.677-1.651-1.677zm4.548-1.595c1.037.833 1.8 1.821 2.189 2.904.45-.336.719-.864.719-1.449 0-1.002-.815-1.816-1.818-1.816-.399 0-.778.129-1.09.363v-.002zM2.711 9.963c-1.003 0-1.817.816-1.817 1.818 0 .543.239 1.048.644 1.389.401-1.079 1.172-2.053 2.213-2.876-.302-.21-.663-.329-1.039-.329v-.002zm9.217 12.079c-5.906 0-10.709-3.205-10.709-7.142 0-.275.023-.544.068-.809C.494 13.598 0 12.729 0 11.777c0-1.496 1.227-2.713 2.725-2.713.674 0 1.303.246 1.797.682 1.856-1.191 4.357-1.941 7.112-1.992l1.812-5.524.404.095s.016 0 .016.002l4.223.993c.344-.798 1.138-1.36 2.065-1.36 1.229 0 2.231 1.004 2.231 2.234 0 1.232-1.003 2.234-2.231 2.234s-2.23-1.004-2.23-2.23l-3.851-.912-1.467 4.477c2.65.105 5.047.854 6.844 2.021.494-.464 1.144-.719 1.833-.719 1.498 0 2.718 1.213 2.718 2.711 0 .987-.54 1.886-1.378 2.365.029.255.059.494.059.749-.015 3.938-4.806 7.143-10.72 7.143l-.034.009zm8.179-19.187c-.74 0-1.34.599-1.34 1.338 0 .738.6 1.34 1.34 1.34.732 0 1.33-.6 1.33-1.334 0-.733-.598-1.332-1.347-1.332l.017-.012z"/>
+  </symbol>
+</svg>
+
+    <header class="header">
+  <amp-img alt="My New Hugo Site"
+    width="128px"
+    height="128px"
+    class="logo"
+    src=""
+    sizes="(max-width: 800px) 36px, 128px">
+  </amp-img>
+  
+    <h2 class="title"><a href="https://LhengXu.github.io" title="My New Hugo Site">My New Hugo Site</a></h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button" on="tap:sidebar.open">
+    <span class="icon icon-menu"></span>
+  </button>
+
+  
+  <nav class="menu">
+    <ul class="menu-list">
+      
+      
+      
+      
+    </ul>
+  </nav>
+
+  <ul class="social-list">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <li class="social-item">
+    <a href="/index.xml" title="RSS">
+      <svg class="icon" fill="currentColor"><use xlink:href="#icon-rss" /></svg>
+    </a>
+  </li>
+</ul>
+
+</header>
+
+    <amp-sidebar id="sidebar" class="sidebar" layout="nodisplay" side="right">
+  <ul class="sidebar-list">
+    <li class="sidebar-menu"><button class="sidebar-icon" on="tap:sidebar.close">X</button></li>
+    
+    
+    
+    
+  </ul>
+</amp-sidebar>
+
+    
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Blog</h1>
+      <p class="entry-meta"><span class="entry-time">Jul 15, 2019</span> 12 min read</p>
+    </header>
+    
+
+    <article class="post-content">
+
+<h1 id="ssm-crud">SSM CRUD</h1>
+
+<h2 id="一-基础环境搭建">一.基础环境搭建</h2>
+
+<h3 id="1-创建maven工程">1.创建maven工程</h3>
+
+<pre><code class="language-xml">&lt;dependencies&gt;
+
+   &lt;!--引入pageHelper分页插件 --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+      &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+      &lt;version&gt;5.0.0&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!-- MBG --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;
+      &lt;version&gt;1.3.5&lt;/version&gt;
+   &lt;/dependency&gt;
+
+
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+      &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!-- 返回json字符串的支持 --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+      &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+      &lt;version&gt;2.8.8&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!--JSR303数据校验支持；tomcat7及以上的服务器， 
+   tomcat7以下的服务器：el表达式。额外给服务器的lib包中替换新的标准的el
+   --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+      &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+      &lt;version&gt;5.4.1.Final&lt;/version&gt;
+   &lt;/dependency&gt;
+
+
+   &lt;!-- Spring-Jdbc --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+      &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!--Spring-test --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-test --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+      &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;
+   &lt;/dependency&gt;
+
+
+   &lt;!-- Spring面向切面编程 --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+      &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!--MyBatis --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+      &lt;version&gt;3.4.2&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;!-- MyBatis整合Spring的适配包 --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+      &lt;version&gt;1.3.1&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!-- 数据库连接池、驱动 --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/c3p0/c3p0 --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;c3p0&lt;/groupId&gt;
+      &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+      &lt;version&gt;0.9.1&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;version&gt;5.1.41&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;!-- （jstl，servlet-api，junit） --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/jstl/jstl --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;jstl&lt;/groupId&gt;
+      &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+      &lt;version&gt;1.2&lt;/version&gt;
+   &lt;/dependency&gt;
+
+   &lt;!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;3.0.1&lt;/version&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+   &lt;/dependency&gt;
+
+
+   &lt;!-- junit --&gt;
+   &lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.12&lt;/version&gt;
+   &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<h3 id="2-编写web-xml文件">2.编写web.xml文件</h3>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;
+         id=&quot;WebApp_ID&quot; version=&quot;2.5&quot;&gt;
+  &lt;!--1.启动Spring容器--&gt;
+  &lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+  &lt;/context-param&gt;
+
+  &lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+  &lt;/listener&gt;
+
+  &lt;!--2.配置spring MVC前端控制器--&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;dispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;!-- 3、字符编码过滤器，一定要放在所有过滤器之前 --&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;encoding&lt;/param-name&gt;
+      &lt;param-value&gt;utf8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;forceRequestEncoding&lt;/param-name&gt;
+      &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;forceResponseEncoding&lt;/param-name&gt;
+      &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+
+  &lt;!-- 4、使用Rest风格的URI，将页面普通的post请求转为指定的delete或者put请求 --&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;HttpPutFormContentFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.HttpPutFormContentFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;HttpPutFormContentFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+
+<h3 id="3-配置springmvc">3.配置springmvc</h3>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;
+
+    &lt;!--SpringMVC的配置文件，包含网站跳转逻辑的控制，配置  --&gt;
+    &lt;context:component-scan base-package=&quot;com.sziit&quot; use-default-filters=&quot;false&quot;&gt;
+        &lt;!--只扫描控制器。  --&gt;
+        &lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
+    &lt;/context:component-scan&gt;
+    
+    &lt;!--配置视图解析器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+    
+    &lt;!--两个标准配置--&gt;
+    &lt;!-- 将springmvc不能处理的请求交给tomcat --&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+    &lt;!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 --&gt;
+    &lt;mvc:annotation-driven/&gt;
+&lt;/beans&gt;
+</code></pre>
+
+<h3 id="4-配置spring配置文件">4.配置spring配置文件</h3>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;com.sziit&quot;&gt;
+        &lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
+    &lt;/context:component-scan&gt;
+
+    &lt;!-- Spring的配置文件，这里主要配置和业务逻辑有关的 --&gt;
+    &lt;!--=================== 数据源，事务控制，xxx ================--&gt;
+    &lt;context:property-placeholder location=&quot;classpath:dbconfig.properties&quot;/&gt;
+    &lt;bean id=&quot;pooledDataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.jdbcUrl}&quot;/&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;/&gt;
+        &lt;property name=&quot;user&quot; value=&quot;${jdbc.user}&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!--================== 配置和MyBatis的整合=============== --&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!-- 指定mybatis全局配置文件的位置 --&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
+        &lt;!-- 指定mybatis，mapper文件的位置 --&gt;
+        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置扫描器，将mybatis接口的实现加入到ioc容器中 --&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;com.sziit.dao&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- ===============事务控制的配置 ================--&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;!--控制数据源--&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;pooledDataSource&quot;/&gt;
+    &lt;/bean&gt;
+
+    &lt;!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）  --&gt;
+    &lt;aop:config&gt;
+        &lt;aop:pointcut id=&quot;txPoint&quot; expression=&quot;execution(* com.sziit.service..*(..))&quot;/&gt;
+        &lt;!-- 配置事务增强 --&gt;
+        &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPoint&quot;/&gt;
+    &lt;/aop:config&gt;
+
+    &lt;!--配置事务增强，事务如何切入  --&gt;
+    &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+        &lt;tx:attributes&gt;
+            &lt;!-- 所有方法都是事务方法 --&gt;
+            &lt;tx:method name=&quot;*&quot;/&gt;
+            &lt;!--以get开始的所有方法  --&gt;
+            &lt;tx:method name=&quot;get&quot; read-only=&quot;true&quot;/&gt;
+        &lt;/tx:attributes&gt;
+    &lt;/tx:advice&gt;
+    &lt;!-- Spring配置文件的核心点（数据源、与mybatis的整合，事务控制） --&gt;
+
+&lt;/beans&gt;
+</code></pre>
+
+<h3 id="5-配置mybatis">5.配置mybatis</h3>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+
+&lt;configuration&gt;
+    &lt;settings&gt;
+        &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+    &lt;/settings&gt;
+    &lt;typeAliases&gt;
+        &lt;package name=&quot;com.sziit.bean&quot;/&gt;
+    &lt;/typeAliases&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<h2 id="二-基础模块">二.基础模块</h2>
+
+<h3 id="1-创建表">1.创建表</h3>
+
+<pre><code class="language-sql">CREATE TABLE `tbl_emp` (
+  `emp_id` int(11) NOT NULL,
+  `emp_name` varchar(255) NOT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `d_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`emp_id`),
+  KEY `fk_emp_dept` (`d_id`),
+  CONSTRAINT `fk_emp_dept` FOREIGN KEY (`d_id`) REFERENCES `tbl_dept` (`dept_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+</code></pre>
+
+<pre><code class="language-sql">CREATE TABLE `tbl_dept` (
+  `dept_id` int(11) NOT NULL,
+  `dept_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+</code></pre>
+
+<h3 id="2-使用逆向工程">2.使用逆向工程</h3>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+      PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+      &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+&lt;generatorConfiguration&gt;
+
+   &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;
+      &lt;commentGenerator&gt;
+         &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;
+      &lt;/commentGenerator&gt;
+      &lt;!-- 配置数据库连接 --&gt;
+      &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
+                  connectionURL=&quot;jdbc:mysql://localhost:3306/ssm_crud&quot; userId=&quot;root&quot;
+                  password=&quot;123&quot;&gt;
+      &lt;/jdbcConnection&gt;
+
+      &lt;javaTypeResolver&gt;
+         &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+      &lt;/javaTypeResolver&gt;
+
+      &lt;!-- 指定javaBean生成的位置 --&gt;
+      &lt;javaModelGenerator targetPackage=&quot;com.sziit.bean&quot;
+                     targetProject=&quot;.\src\main\java&quot;&gt;
+         &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+         &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+      &lt;/javaModelGenerator&gt;
+
+      &lt;!--指定sql映射文件生成的位置 --&gt;
+      &lt;sqlMapGenerator targetPackage=&quot;mapper&quot; targetProject=&quot;.\src\main\resources&quot;&gt;
+         &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+      &lt;/sqlMapGenerator&gt;
+
+      &lt;!-- 指定dao接口生成的位置，mapper接口 --&gt;
+      &lt;javaClientGenerator type=&quot;XMLMAPPER&quot;
+                      targetPackage=&quot;com.sziit.dao&quot; targetProject=&quot;.\src\main\java&quot;&gt;
+         &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;
+      &lt;/javaClientGenerator&gt;
+
+
+      &lt;!-- table指定每个表的生成策略 --&gt;
+      &lt;table tableName=&quot;tbl_emp&quot; domainObjectName=&quot;Employee&quot;&gt;&lt;/table&gt;
+      &lt;table tableName=&quot;tbl_dept&quot; domainObjectName=&quot;Department&quot;&gt;&lt;/table&gt;
+   &lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+</code></pre>
+
+<p>创建类使用</p>
+
+<pre><code class="language-java">package com.sziit.test;
+
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.internal.DefaultShellCallback;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MBGTest {
+
+	public static void main(String[] args) throws Exception {
+		List&lt;String&gt; warnings = new ArrayList&lt;String&gt;();
+		boolean overwrite = true;
+		File configFile = new File(&quot;mbg.xml&quot;);
+		ConfigurationParser cp = new ConfigurationParser(warnings);
+		Configuration config = cp.parseConfiguration(configFile);
+		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+		MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
+				callback, warnings);
+		myBatisGenerator.generate(null);
+	}
+}
+
+</code></pre>
+
+<p>对生成的mapper文件进行修改（增加一个部门的名字，原来只有部门的ID）</p>
+
+<p>Employee.class</p>
+
+<pre><code class="language-java">//希望查询员工的同时部门信息也是查询好的
+private Department department;
+
+public Department getDepartment() {
+    return department;
+}
+ public void setDepartment(Department department) {
+        this.department = department;
+}
+</code></pre>
+
+<p>EmployeeMapper.class</p>
+
+<pre><code class="language-java">List&lt;Employee&gt; selectByExampleWithDept(EmployeeExample example);
+
+Employee selectByPrimaryKeyWithDept(Integer empId);
+</code></pre>
+
+<p>EmployeeMapper.xml</p>
+
+<pre><code class="language-xml">&lt;resultMap type=&quot;com.sziit.bean.Employee&quot; id=&quot;WithDeptResultMap&quot;&gt;
+  &lt;id column=&quot;emp_id&quot; jdbcType=&quot;INTEGER&quot; property=&quot;empId&quot; /&gt;
+  &lt;result column=&quot;emp_name&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;empName&quot; /&gt;
+  &lt;result column=&quot;gender&quot; jdbcType=&quot;CHAR&quot; property=&quot;gender&quot; /&gt;
+  &lt;result column=&quot;email&quot; jdbcType=&quot;VARCHAR&quot; property=&quot;email&quot; /&gt;
+  &lt;result column=&quot;d_id&quot; jdbcType=&quot;INTEGER&quot; property=&quot;dId&quot; /&gt;
+  &lt;!-- 指定联合查询出的部门字段的封装 --&gt;
+  &lt;association property=&quot;department&quot; javaType=&quot;com.sziit.bean.Department&quot;&gt;
+    &lt;id column=&quot;dept_id&quot; property=&quot;deptId&quot;/&gt;
+    &lt;result column=&quot;dept_name&quot; property=&quot;deptName&quot;/&gt;
+  &lt;/association&gt;
+&lt;/resultMap&gt;
+</code></pre>
+
+<pre><code class="language-xml">&lt;!-- 查询员工同时带部门信息 --&gt;
+&lt;select id=&quot;selectByExampleWithDept&quot; resultMap=&quot;WithDeptResultMap&quot;&gt;
+  select
+  &lt;if test=&quot;distinct&quot;&gt;
+    distinct
+  &lt;/if&gt;
+  &lt;include refid=&quot;WithDept_Column_List&quot; /&gt;
+  FROM tbl_emp e
+  left join tbl_dept d on e.`d_id`=d.`dept_id`
+  &lt;if test=&quot;_parameter != null&quot;&gt;
+    &lt;include refid=&quot;Example_Where_Clause&quot; /&gt;
+  &lt;/if&gt;
+  &lt;if test=&quot;orderByClause != null&quot;&gt;
+    order by ${orderByClause}
+  &lt;/if&gt;
+&lt;/select&gt;
+&lt;select id=&quot;selectByPrimaryKeyWithDept&quot; resultMap=&quot;WithDeptResultMap&quot;&gt;
+  select
+  &lt;include refid=&quot;WithDept_Column_List&quot; /&gt;
+  FROM tbl_emp e
+  left join tbl_dept d on e.`d_id`=d.`dept_id`
+  where emp_id = #{empId,jdbcType=INTEGER}
+&lt;/select&gt;
+</code></pre>
+
+<h3 id="3-测试">3.测试</h3>
+
+<pre><code class="language-java">/**
+ * 测试dao层的工作
+ * @author lfy
+ *推荐Spring的项目就可以使用Spring的单元测试，可以自动注入我们需要的组件
+ *1、导入SpringTest模块
+ *2、@ContextConfiguration指定Spring配置文件的位置
+ *3、直接autowired要使用的组件即可
+ */
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={&quot;classpath:applicationContext.xml&quot;})
+public class MapperTest {
+
+	@Autowired
+	DepartmentMapper departmentMapper;
+
+	@Autowired
+	EmployeeMapper employeeMapper;
+
+	@Autowired
+	SqlSession sqlSession;
+
+	/**
+	 * 测试DepartmentMapper
+	 */
+	@Test
+	public void testCRUD() {
+	/*	//1、创建SpringIOC容器
+		ApplicationContext ioc = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+		//2、从容器中获取mapper
+		DepartmentMapper bean = ioc.getBean(DepartmentMapper.class);*/
+		System.out.println(departmentMapper);
+
+//		1、插入几个部门
+//		departmentMapper.insertSelective(new Department(null, &quot;开发部&quot;));
+//		departmentMapper.insertSelective(new Department(null, &quot;测试部&quot;));
+//
+//		//2、生成员工数据，测试员工插入
+//		employeeMapper.insertSelective(new Employee(null, &quot;Jerry&quot;, &quot;M&quot;, &quot;Jerry@atguigu.com&quot;, 1));
+//
+//		//3、批量插入多个员工；批量，使用可以执行批量操作的sqlSession。
+//
+////		for(){
+////			employeeMapper.insertSelective(new Employee(null, , &quot;M&quot;, &quot;Jerry@atguigu.com&quot;, 1));
+////		}
+		EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+		for(int i = 0;i&lt;1000;i++){
+			String uid = UUID.randomUUID().toString().substring(0,5)+i;
+			mapper.insertSelective(new Employee(null,uid, &quot;M&quot;, uid+&quot;@atguigu.com&quot;, 1));
+		}
+		System.out.println(&quot;批量完成&quot;);
+//
+//	}
+	}
+}
+
+</code></pre>
+
+<p>需要在applicationContext.xml中添加sqlSession</p>
+
+<pre><code class="language-xml">&lt;!-- 配置一个可以执行批量的sqlSession --&gt;
+&lt;bean id=&quot;sqlSession&quot; class=&quot;org.mybatis.spring.SqlSessionTemplate&quot;&gt;
+    &lt;constructor-arg name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot;/&gt;
+    &lt;constructor-arg name=&quot;executorType&quot; value=&quot;BATCH&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<h2 id="三-查询">三.查询</h2>
+
+<h3 id="1-controller">1.Controller</h3>
+
+<p>EmployeeController.java</p>
+
+<pre><code class="language-java">@Controller
+public class EmployeeController {
+    @Autowired
+    EmployeeService employeeService;
+    /**
+     * 查询员工数据（分页查询）
+     *
+     * @return
+     */
+     @RequestMapping(&quot;/emps&quot;)
+        public String getEmps(@RequestParam(value = &quot;pn&quot;,defaultValue = &quot;1&quot;) Integer pn, Model model){
+         // 在查询之前只需要调用，传入页码，以及每页的大小
+         PageHelper.startPage(pn,5);
+         // startPage后面紧跟的这个查询就是一个分页查询
+         List&lt;Employee&gt; emps = employeeService.getAll();
+         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
+         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
+         PageInfo page = new PageInfo(emps,5);
+         model.addAttribute(&quot;pageInfo&quot;,page);
+         return &quot;list&quot;;
+     }
+}
+</code></pre>
+
+<h3 id="2-service">2.Service</h3>
+
+<p>EmployeeService.java</p>
+
+<pre><code class="language-java">@Service
+public class EmployeeService {
+
+    @Autowired
+    EmployeeMapper employeeMapper;
+
+    public List&lt;Employee&gt; getAll(){
+        return employeeMapper.selectByExample(null);
+    }
+}
+</code></pre>
+
+<h3 id="3-添加pagehelper插件">3.添加pageHelper插件</h3>
+
+<p>mybatis-config.xml</p>
+
+<pre><code class="language-xml">&lt;plugins&gt;
+    &lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;
+        &lt;!--分页参数合理化  --&gt;
+        &lt;property name=&quot;reasonable&quot; value=&quot;true&quot;/&gt;
+    &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+
+<h3 id="4-编写测试类">4.编写测试类</h3>
+
+<pre><code class="language-java">/**
+ * 使用Spring测试模块提供的测试请求功能，测试curd请求的正确性
+ * Spring4测试的时候，需要servlet3.0的支持
+ * @author lfy
+ *
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(locations = { &quot;classpath:applicationContext.xml&quot;,
+      &quot;file:src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml&quot; })
+public class MvcTest {
+   // 传入Springmvc的ioc
+   @Autowired
+   WebApplicationContext context;
+   // 虚拟mvc请求，获取到处理结果。
+   MockMvc mockMvc;
+
+   @Before
+   public void initMokcMvc() {
+      mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+   }
+
+   @Test
+   public void testPage() throws Exception {
+      //模拟请求拿到返回值
+      MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(&quot;/emps&quot;).param(&quot;pn&quot;, &quot;5&quot;))
+            .andReturn();
+
+      //请求成功以后，请求域中会有pageInfo；我们可以取出pageInfo进行验证
+      MockHttpServletRequest request = result.getRequest();
+      PageInfo pi = (PageInfo) request.getAttribute(&quot;pageInfo&quot;);
+      System.out.println(&quot;当前页码：&quot;+pi.getPageNum());
+      System.out.println(&quot;总页码：&quot;+pi.getPages());
+      System.out.println(&quot;总记录数：&quot;+pi.getTotal());
+      System.out.println(&quot;在页面需要连续显示的页码&quot;);
+      int[] nums = pi.getNavigatepageNums();
+      for (int i : nums) {
+         System.out.print(&quot; &quot;+i);
+      }
+
+      //获取员工数据
+      List&lt;Employee&gt; list = pi.getList();
+      for (Employee employee : list) {
+         System.out.println(&quot;ID：&quot;+employee.getEmpId()+&quot;==&gt;Name:&quot;+employee.getEmpName());
+      }
+      
+   }
+
+}
+</code></pre>
+
+<h2 id="四-页面">四.页面</h2>
+
+<h3 id="1-首页">1.首页</h3>
+
+<p>index.jsp</p>
+
+<pre><code class="language-jsp">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+         pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;jsp:forward page=&quot;/emps&quot;&gt;&lt;/jsp:forward&gt;
+</code></pre>
+
+<h3 id="2-员工页面">2.员工页面</h3>
+
+<p>list.jsp</p>
+
+<pre><code class="language-jsp">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+         pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;员工列表&lt;/title&gt;
+    &lt;%--APP_PATHj就是服务器的路径 http://localhost:3306/crud--%&gt;
+    &lt;%
+        pageContext.setAttribute(&quot;APP_PATH&quot;, request.getContextPath());
+    %&gt;
+    &lt;!-- web路径：
+不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
+以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
+      http://localhost:3306/crud
+ --&gt;
+    &lt;%--引入资源--%&gt;
+    &lt;script type=&quot;text/javascript&quot;
+            src=&quot;${APP_PATH }/static/js/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;link
+            href=&quot;${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css&quot;
+            rel=&quot;stylesheet&quot;&gt;
+    &lt;script
+            src=&quot;${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- 搭建显示页面 --&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;!-- 标题 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+            &lt;h1&gt;SSM-CRUD&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 按钮 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-4 col-md-offset-8&quot;&gt;
+            &lt;button class=&quot;btn btn-primary&quot;&gt;新增&lt;/button&gt;
+            &lt;button class=&quot;btn btn-danger&quot;&gt;删除&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 显示表格数据 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+            &lt;table class=&quot;table table-hover&quot;&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;#&lt;/th&gt;
+                    &lt;th&gt;empName&lt;/th&gt;
+                    &lt;th&gt;gender&lt;/th&gt;
+                    &lt;th&gt;email&lt;/th&gt;
+                    &lt;th&gt;deptName&lt;/th&gt;
+                    &lt;th&gt;操作&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;%--填充数据--%&gt;
+                &lt;c:forEach items=&quot;${pageInfo.list}&quot; var=&quot;emp&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;${emp.empId}&lt;/th&gt;
+                        &lt;th&gt;${emp.empName }&lt;/th&gt;
+                        &lt;th&gt;${emp.gender==&quot;M&quot;?&quot;男&quot;:&quot;女&quot; }&lt;/th&gt;
+                        &lt;th&gt;${emp.email }&lt;/th&gt;
+                        &lt;th&gt;${emp.department.deptName }&lt;/th&gt;
+                        &lt;th&gt;
+                            &lt;button class=&quot;btn btn-primary btn-sm&quot;&gt;
+                                &lt;span class=&quot;glyphicon glyphicon-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                编辑
+                            &lt;/button&gt;
+                            &lt;button class=&quot;btn btn-danger btn-sm&quot;&gt;
+                                &lt;span class=&quot;glyphicon glyphicon-trash&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                删除
+                            &lt;/button&gt;
+                        &lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/c:forEach&gt;
+
+
+            &lt;/table&gt;
+        &lt;/div&gt;
+
+        &lt;%--显示分页信息--%&gt;
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;!--分页文字信息  --&gt;
+            &lt;div class=&quot;col-md-6&quot;&gt;
+                当前${pageInfo.pageNum}页，总 ${pageInfo.pages}页，总 ${pageInfo.total}条记录
+            &lt;/div&gt;
+            &lt;!-- 分页条信息 --&gt;
+            &lt;div class=&quot;col-md-6&quot;&gt;
+                &lt;nav aria-label=&quot;Page navigation&quot;&gt;
+                    &lt;ul class=&quot;pagination&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;${APP_PATH}/emps?pn=1&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;
+                        &lt;%--判断是否有前一页--%&gt;
+                        &lt;c:if test=&quot;${pageInfo.hasPreviousPage}&quot;&gt;
+                            &lt;li&gt;
+                                &lt;a href=&quot;${APP_PATH}/emps?pn=${pageInfo.pageNum-1}&quot; aria-label=&quot;Previous&quot;&gt;
+                                    &lt;span aria-hidden=&quot;true&quot;&gt;&amp;laquo;&lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/c:if&gt;
+                        &lt;%--填充页面页数--%&gt;
+                        &lt;c:forEach items=&quot;${pageInfo.navigatepageNums }&quot; var=&quot;page_Num&quot;&gt;
+                            &lt;c:if test=&quot;${page_Num==pageInfo.pageNum}&quot;&gt;
+                                &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;${page_Num}&lt;/a&gt;&lt;/li&gt;
+                            &lt;/c:if&gt;
+                            &lt;c:if test=&quot;${page_Num!=pageInfo.pageNum}&quot;&gt;
+                                &lt;li&gt;&lt;a href=&quot;${APP_PATH}/emps?pn=${page_Num}&quot;&gt;${page_Num}&lt;/a&gt;&lt;/li&gt;
+                            &lt;/c:if&gt;
+                        &lt;/c:forEach&gt;
+                        &lt;%--判断是否有下一页 --%&gt;
+                        &lt;c:if test=&quot;${pageInfo.hasNextPage}&quot;&gt;
+                            &lt;li&gt;
+                                &lt;a href=&quot;${APP_PATH}/emps?pn=${pageInfo.pageNum+1}&quot; aria-label=&quot;Next&quot;&gt;
+                                    &lt;span aria-hidden=&quot;true&quot;&gt;&amp;raquo;&lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/c:if&gt;
+                        
+                        &lt;li&gt;&lt;a href=&quot;${APP_PATH}/emps?pn=${pageInfo.pages}&quot;&gt;末页&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/nav&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="五-ajax请求页面">五.Ajax请求页面</h2>
+
+<h3 id="1-搭建显示页面">1.搭建显示页面</h3>
+
+<pre><code class="language-html">&lt;!-- 搭建显示页面 --&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;!-- 标题 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+            &lt;h1&gt;SSM-CRUD&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 按钮 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-4 col-md-offset-8&quot;&gt;
+            &lt;button class=&quot;btn btn-primary&quot; id=&quot;emp_add_modal_btn&quot;&gt;新增&lt;/button&gt;
+            &lt;button class=&quot;btn btn-danger&quot; id=&quot;emp_delete_all_btn&quot;&gt;删除&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 显示表格数据 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+            &lt;table class=&quot;table table-hover&quot; id=&quot;emps_table&quot;&gt;
+                &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;
+                        &lt;input type=&quot;checkbox&quot; id=&quot;check_all&quot;/&gt;
+                    &lt;/th&gt;
+                    &lt;th&gt;#&lt;/th&gt;
+                    &lt;th&gt;empName&lt;/th&gt;
+                    &lt;th&gt;gender&lt;/th&gt;
+                    &lt;th&gt;email&lt;/th&gt;
+                    &lt;th&gt;deptName&lt;/th&gt;
+                    &lt;th&gt;操作&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 显示分页信息 --&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;!--分页文字信息  --&gt;
+        &lt;div class=&quot;col-md-6&quot; id=&quot;page_info_area&quot;&gt;&lt;/div&gt;
+        &lt;!-- 分页条信息 --&gt;
+        &lt;div class=&quot;col-md-6&quot; id=&quot;page_nav_area&quot;&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3 id="2-ajax请求">2.ajax请求</h3>
+
+<pre><code class="language-javascript">&lt;%--ajax请求--%&gt;
+$(function(){
+    //去首页
+    to_page(1);
+});
+function to_page(pn) {
+    $.ajax({
+        url:&quot;${APP_PATH}/emps&quot;,
+        data:&quot;pn=&quot;+pn,
+        type:&quot;GET&quot;,
+        success:function (result) {
+            console.log(result);
+            //1.显示员工数据
+            build_emps_table(result);
+            //2.解析并显示分页信息
+            build_page_info(result);
+            //3.解析显示分页条数据
+            build_page_nav(result);
+
+        }
+    });
+}
+</code></pre>
+
+<h3 id="3-填写显示员工信息的函数">3.填写显示员工信息的函数</h3>
+
+<h4 id="1-显示员工数据">1.显示员工数据</h4>
+
+<pre><code class="language-javascript">function build_emps_table(result) {
+    //清空员工数据
+    $(&quot;#emps_table tbody&quot;).empty();
+    //获取列表并显示
+    var emps = result.extend.pageInfo.list;
+    $.each(emps, function (index, item) {
+        var checkBoxTd = $(&quot;&lt;td&gt;&lt;input type='checkbox' class='check_item'/&gt;&lt;/td&gt;&quot;);
+        var empIdTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(item.empId);
+        var empNameTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(item.empName);
+        var genderTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(item.gender == &quot;M&quot; ? &quot;男&quot; : &quot;女&quot;);
+        var emailTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(item.email)
+        var deptNameTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(item.department.deptName);
+        var editBtn = $(&quot;&lt;button&gt;&lt;/button&gt;&quot;).addClass(&quot;btn btn-primary btn-sm&quot;)
+            .append($(&quot;&lt;span&gt;&lt;/span&gt;&quot;).addClass(&quot;glyphicon glyphicon-pencil&quot;)).append(&quot;编辑&quot;);
+        var delBtn = $(&quot;&lt;button&gt;&lt;/button&gt;&quot;).addClass(&quot;btn btn-danger btn-sm&quot;)
+            .append($(&quot;&lt;span&gt;&lt;/span&gt;&quot;).addClass(&quot;glyphicon glyphicon-trash&quot;)).append(&quot;删除&quot;);
+        var btnTd = $(&quot;&lt;td&gt;&lt;/td&gt;&quot;).append(editBtn).append(&quot; &quot;).append(delBtn);
+        $(&quot;&lt;tr&gt;&lt;/tr&gt;&quot;).append(checkBoxTd)
+            .append(empIdTd)
+            .append(empNameTd)
+            .append(genderTd)
+            .append(emailTd)
+            .append(deptNameTd)
+            .append(btnTd)
+            .appendTo(&quot;#emps_table tbody&quot;);
+    })
+}
+</code></pre>
+
+<h4 id="2-显示分页信息">2.显示分页信息</h4>
+
+<pre><code class="language-javascript">//解析显示分页信息
+function build_page_info(result) {
+    $(&quot;#page_info_area&quot;).empty();
+    totalRecord = result.extend.pageInfo.total;
+    currentPage = result.extend.pageInfo.pageNum;
+    $(&quot;#page_info_area&quot;).append(&quot;当前&quot;+currentPage+&quot;页，共&quot;+totalRecord+&quot;记录，共&quot;+result.extend.pageInfo.pages+&quot;页&quot;);
+}
+</code></pre>
+
+<h4 id="3-解析显示分页条">3.解析显示分页条</h4>
+
+<pre><code class="language-javascript">function build_page_nav(result) {
+    //清除页面
+    $(&quot;#page_nav_area&quot;).empty();
+    var ul = $(&quot;&lt;ul&gt;&lt;/ul&gt;&quot;).addClass(&quot;pagination&quot;);
+    //构建元素
+    //首页和前一页
+    var firstPageLi = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;).append($(&quot;&lt;a&gt;&lt;/a&gt;&quot;).append(&quot;首页&quot;).attr(&quot;href&quot;,&quot;#&quot;));
+    var prePageLi = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;).append($(&quot;&lt;a&gt;&lt;/a&gt;&quot;).append(&quot;&amp;laquo;&quot;));
+    if(result.extend.pageInfo.hasPreviousPage==false){
+        firstPageLi.addClass(&quot;disabled&quot;);
+        prePageLi.addClass(&quot;disabled&quot;);
+    }else {
+        firstPageLi.click(function () {
+            to_page(1);
+        });
+        prePageLi.click(function () {
+            to_page(result.extend.pageInfo.pageNum-1);
+        })
+    }
+    //尾页和后一页
+    var lastPageLi = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;).append($(&quot;&lt;a&gt;&lt;/a&gt;)&quot;).append(&quot;尾页&quot;).attr(&quot;href&quot;,&quot;#&quot;));
+    var nextPageLi = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;).append($(&quot;&lt;a&gt;&lt;/a&gt;&quot;).append(&quot;&amp;raquo;&quot;));
+    if(result.extend.pageInfo.hasNextPage==false){
+        lastPageLi.addClass(&quot;disabled&quot;);
+        nextPageLi.addClass(&quot;disabled&quot;);
+    }else {
+        lastPageLi.click(function () {
+            to_page(result.extend.pageInfo.pages);
+        });
+        nextPageLi.click(function () {
+            to_page(result.extend.pageInfo.pageNum+1);
+        })
+    }
+    //将首页尾页 上下页面加进去
+    //添加首页和上一页
+    ul.append(firstPageLi).append(prePageLi);
+    //遍历页面提示
+    $.each(result.extend.pageInfo.navigatepageNums,function (index,item) {
+        var numLi = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;).append($(&quot;&lt;a&gt;&lt;/a&gt;&quot;).append(item));
+        if(result.extend.pageInfo.pageNum==item){
+            numLi.addClass(&quot;active&quot;);
+        }
+        numLi.click(function () {
+            to_page(item);
+        });
+        ul.append(numLi);
+    });
+    //添加尾页和下一页
+    ul.append(lastPageLi).append(nextPageLi);
+
+    //把Ul加入到nav
+    var navEle = $(&quot;&lt;nav&gt;&lt;/nav&gt;&quot;).append(ul);
+    navEle.appendTo(&quot;#page_nav_area&quot;);
+}
+//点击新增按钮弹出模块
+$(&quot;#emp_add_modal_btn&quot;).click(function () {
+
+    //发送ajax请求 部门信息
+    getDepts(&quot;#empAddModal select&quot;);
+    $(&quot;#empAddModal&quot;).modal({
+        backdrop:&quot;static&quot;
+    });
+})
+</code></pre>
+
+<h3 id="4-员工添加">4.员工添加</h3>
+
+<h4 id="1-点击新增出现添加模块">1.点击新增出现添加模块</h4>
+
+<pre><code class="language-javascript">$(&quot;#emp_add_modal_btn&quot;).click(function () {
+
+    //发送ajax请求 部门信息
+    getDepts(&quot;#empAddModal select&quot;);
+    $(&quot;#empAddModal&quot;).modal({
+        backdrop:&quot;static&quot;
+    });
+})
+</code></pre>
+
+<h4 id="2-添加模块">2.添加模块</h4>
+
+<pre><code class="language-javascript">&lt;!-- 员工添加的模态框 --&gt;
+&lt;div class=&quot;modal fade&quot; id=&quot;empAddModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot; role=&quot;document&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;
+                &lt;h4 class=&quot;modal-title&quot; id=&quot;myModalLabel&quot;&gt;员工添加&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body&quot;&gt;
+                &lt;form class=&quot;form-horizontal&quot;&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;empName&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                            &lt;input type=&quot;text&quot; name=&quot;empName&quot; class=&quot;form-control&quot; id=&quot;empName_add_input&quot; placeholder=&quot;empName&quot;&gt;
+                            &lt;span class=&quot;help-block&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;email&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                            &lt;input type=&quot;text&quot; name=&quot;email&quot; class=&quot;form-control&quot; id=&quot;email_add_input&quot; placeholder=&quot;email@atguigu.com&quot;&gt;
+                            &lt;span class=&quot;help-block&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;gender&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                            &lt;label class=&quot;radio-inline&quot;&gt;
+                                &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;gender1_add_input&quot; value=&quot;M&quot; checked=&quot;checked&quot;&gt; 男
+                            &lt;/label&gt;
+                            &lt;label class=&quot;radio-inline&quot;&gt;
+                                &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;gender2_add_input&quot; value=&quot;F&quot;&gt; 女
+                            &lt;/label&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;deptName&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-4&quot;&gt;
+                            &lt;!-- 部门提交部门id即可 --&gt;
+                            &lt;select class=&quot;form-control&quot; name=&quot;dId&quot;&gt;
+                            &lt;/select&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;关闭&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;emp_save_btn&quot;&gt;保存&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4 id="3-查询部门信息在下拉框">3.查询部门信息在下拉框</h4>
+
+<pre><code class="language-javascript">//查出所有的部门信息在下拉列表中
+function getDepts(ele) {
+    //清空数据
+
+    $.ajax({
+        url:&quot;${APP_PATH}/depts&quot;,
+        type:&quot;GET&quot;,
+        success:function (result) {
+            $.each(result.extend.depts,function () {
+                var options = $(&quot;&lt;option&gt;&lt;/option&gt;&quot;).append(this.deptName).attr(&quot;value&quot;,this.deptId);
+                options.appendTo(ele);
+            });
+        }
+    });
+}
+</code></pre>
+
+<h5 id="1-controller-1">1.Controller</h5>
+
+<p>DepartmentController</p>
+
+<pre><code class="language-java">/**
+ * 处理和部门有关的请求
+ */
+@Controller
+public class DepartmentController {
+    @Autowired
+    DepartmentService departmentService;
+
+    //返回所有的部门
+    @RequestMapping(&quot;/depts&quot;)
+    @ResponseBody
+    public Msg getDepts(){
+        List&lt;Department&gt; depts = departmentService.getDepts();
+        return Msg.success().add(&quot;depts&quot;,depts);
+    }
+}
+</code></pre>
+
+<h5 id="2-service-1">2.Service</h5>
+
+<pre><code class="language-java">@Service
+public class DepartmentService {
+
+    @Autowired
+    DepartmentMapper departmentMapper;
+    public List&lt;Department&gt; getDepts() {
+        List&lt;Department&gt; departments = departmentMapper.selectByExample(null);
+        return departments;
+    }
+}
+</code></pre>
+
+<h4 id="4-用户名-邮箱校检">4.用户名、邮箱校检</h4>
+
+<h5 id="1-controller-2">1.Controller</h5>
+
+<pre><code class="language-java">//检查用户是否可用
+@RequestMapping(value = &quot;/checkuser&quot;)
+@ResponseBody
+public Msg checkuser(@RequestParam(&quot;empName&quot;) String empName){
+   //先判断用户名是否是合法的表达式;
+   String regx = &quot;(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})&quot;;
+   if(!empName.matches(regx)){
+      String msg = &quot;用户名不符合要求&quot;;
+      return Msg.fail().add(&quot;va_msg&quot;, msg);
+
+   }
+   //数据库用户名作比较
+   boolean b = employeeService.checkUser(empName);
+   if(b){
+      return Msg.success().add(&quot;va_msg&quot;,&quot;用户名符合要求&quot;);
+   }else {
+      return Msg.fail().add(&quot;va_msg&quot;, &quot;用户名重复，请重新输入&quot;);
+   }
+
+}
+
+//检查邮箱是否可用
+@RequestMapping(value = &quot;/checkemail&quot;)
+@ResponseBody
+public Msg checkemail(@RequestParam(&quot;empEmail&quot;) String empEmail){
+   //先判断用户邮箱是否是合法的表达式;
+   String regx =  &quot;[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}&quot;;
+   if(!empEmail.matches(regx)){
+      String msg = &quot;邮箱不符合要求&quot;;
+      return Msg.fail().add(&quot;va_msg&quot;, msg);
+
+   }else {
+      return Msg.success().add(&quot;va_msg&quot;,&quot;邮箱格式合格&quot;);
+   }
+
+}
+</code></pre>
+
+<h5 id="2-service-2">2.service</h5>
+
+<pre><code class="language-java">/**
+ * 检测用户名是否可用
+ */
+public boolean checkUser(String empName){
+    EmployeeExample example = new EmployeeExample();
+    EmployeeExample.Criteria  criteria= example.createCriteria();
+    criteria.andEmpNameEqualTo(empName);
+    long count = employeeMapper.countByExample(example);
+    return count==0;
+}
+</code></pre>
+
+<h5 id="3-jsp改变时检验">3.jsp改变时检验</h5>
+
+<pre><code class="language-javascript">//检验用户名
+$(&quot;#empName_add_input&quot;).change(function () {
+    var empName = this.value;
+    $.ajax({
+        url:&quot;${APP_PATH}/checkuser&quot;,
+        data:&quot;empName=&quot;+empName,
+        type:&quot;post&quot;,
+        success:function (result) {
+            //清除当前元素的校验状态
+            $(&quot;#empName_add_input&quot;).parent().removeClass(&quot;has-success has-error&quot;);
+            $(&quot;#empName_add_input&quot;).next(&quot;span&quot;).text(&quot;&quot;);
+            console.log(result);
+            if (result.code == 100) {
+                $(&quot;#empName_add_input&quot;).parent().addClass(&quot;has-success&quot;);
+                $(&quot;#empName_add_input&quot;).next(&quot;span&quot;).text(result.extend.va_msg);
+                $(&quot;#emp_save_btn&quot;).attr(&quot;ajax-va&quot;,&quot;success&quot;);
+            }else {
+                $(&quot;#empName_add_input&quot;).parent().addClass(&quot;has-error&quot;);
+                $(&quot;#empName_add_input&quot;).next(&quot;span&quot;).text(result.extend.va_msg);
+                $(&quot;#emp_save_btn&quot;).attr(&quot;ajax-va&quot;,&quot;error&quot;);
+            }
+        }
+        })
+})
+
+//检验邮箱
+$(&quot;#email_add_input&quot;).change(function () {
+    var empEmail = this.value;
+    $.ajax({
+        url:&quot;${APP_PATH}/checkemail&quot;,
+        data:&quot;empEmail=&quot;+empEmail,
+        type:&quot;post&quot;,
+        success:function (result) {
+            //清除当前元素的校验状态
+            $(&quot;#email_add_input&quot;).parent().removeClass(&quot;has-success has-error&quot;);
+            $(&quot;#email_add_input&quot;).next(&quot;span&quot;).text(&quot;&quot;);
+            console.log(result.extend.va_masg);
+            if (result.code == 100) {
+                $(&quot;#email_add_input&quot;).parent().addClass(&quot;has-success&quot;);
+                $(&quot;#email_add_input&quot;).next(&quot;span&quot;).text(result.extend.va_msg);
+                $(&quot;#emp_save_btn&quot;).attr(&quot;ajax-va&quot;,&quot;success&quot;);
+            }else {
+                $(&quot;#email_add_input&quot;).parent().addClass(&quot;has-error&quot;);
+                $(&quot;#email_add_input&quot;).next(&quot;span&quot;).text(result.extend.va_msg);
+                $(&quot;#emp_save_btn&quot;).attr(&quot;ajax-va&quot;,&quot;error&quot;);
+            }
+        }
+    })
+})
+</code></pre>
+
+<h5 id="4-jsp保存">4.jsp保存</h5>
+
+<pre><code class="language-javascript"> //点击保存
+    $(&quot;#emp_save_btn&quot;).click(function () {
+        //1、模态框中填写的表单数据提交给服务器进行保存
+        //1、先对要提交给服务器的数据进行校验
+        if(!validate_add_form()){
+            return false;
+        };
+        //1、判断之前的ajax用户名校验是否成功。如果成功。
+        if($(this).attr(&quot;ajax-va&quot;)==&quot;error&quot;){
+            return false;
+        }
+//        validate_add_form();
+        $.ajax({
+            url:&quot;${APP_PATH}/emp&quot;,
+            type:&quot;POST&quot;,
+            data:$(&quot;#empAddModal form&quot;).serialize(),
+            success:function (result) {
+                if(result.code==100){
+                    $(&quot;#empAddModal&quot;).modal('hide');
+                    to_page(totalRecord);
+                }else {
+                    alert(&quot;保存失败！&quot;);
+                }
+            }
+        });
+    });
+</code></pre>
+
+<h5 id="5-保存时检验">5.保存时检验</h5>
+
+<pre><code class="language-javascript">//校验表单数据
+function validate_add_form() {
+    //1、拿到要校验的数据，使用正则表达式
+    var empName = $(&quot;#empName_add_input&quot;).val();
+    var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
+    if(!regName.test(empName)){
+        return false;
+    }
+    else{
+        return true;
+    }
+
+    //2、校验邮箱信息
+    var email = $(&quot;#email_add_input&quot;).val();
+    var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+    if(!regEmail.test(email)){
+        alert(&quot;邮箱格式不正确&quot;);
+    }else{
+
+    }
+}
+</code></pre>
+
+<h3 id="5-员工修改">5.员工修改</h3>
+
+<h4 id="1-修改模态框">1.修改模态框</h4>
+
+<pre><code class="language-html">&lt;!-- 员工修改的模态框 --&gt;
+&lt;div class=&quot;modal fade&quot; id=&quot;empUpdateModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot; role=&quot;document&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;
+                &lt;h4 class=&quot;modal-title&quot;&gt;员工修改&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body&quot;&gt;
+                &lt;form class=&quot;form-horizontal&quot;&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;empName&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                                &lt;p class=&quot;form-control-static&quot; id=&quot;empName_update_static&quot;&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;email&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                            &lt;input type=&quot;text&quot; name=&quot;email&quot; class=&quot;form-control&quot; id=&quot;email_update_input&quot; placeholder=&quot;email@atguigu.com&quot;&gt;
+                            &lt;span class=&quot;help-block&quot;&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;gender&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-10&quot;&gt;
+                            &lt;label class=&quot;radio-inline&quot;&gt;
+                                &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;gender1_update_input&quot; value=&quot;M&quot; checked=&quot;checked&quot;&gt; 男
+                            &lt;/label&gt;
+                            &lt;label class=&quot;radio-inline&quot;&gt;
+                                &lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;gender2_update_input&quot; value=&quot;F&quot;&gt; 女
+                            &lt;/label&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;form-group&quot;&gt;
+                        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;deptName&lt;/label&gt;
+                        &lt;div class=&quot;col-sm-4&quot;&gt;
+                            &lt;!-- 部门提交部门id即可 --&gt;
+                            &lt;select class=&quot;form-control&quot; name=&quot;dId&quot;&gt;
+                            &lt;/select&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;关闭&lt;/button&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;emp_update_btn&quot;&gt;更新&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4 id="2-模态框显示数据">2.模态框显示数据</h4>
+
+<h5 id="1-controller-3">1.controller</h5>
+
+<pre><code class="language-java">//根据员工ID查询员工信息
+@RequestMapping(value = &quot;/emp/{id}&quot;,method = RequestMethod.GET)
+@ResponseBody
+public Msg getEmp(@PathVariable(&quot;id&quot;) Integer id){
+   Employee employee = employeeService.getEmp(id);
+   return Msg.success().add(&quot;emp&quot;,employee);
+}
+</code></pre>
+
+<h5 id="2-service-3">2.service</h5>
+
+<pre><code class="language-java">//根据员工ID查询员工信息
+@RequestMapping(value = &quot;/emp/{id}&quot;,method = RequestMethod.GET)
+@ResponseBody
+public Msg getEmp(@PathVariable(&quot;id&quot;) Integer id){
+   Employee employee = employeeService.getEmp(id);
+   return Msg.success().add(&quot;emp&quot;,employee);
+}
+</code></pre>
+
+<h5 id="3-jsp页面">3.jsp页面</h5>
+
+<pre><code class="language-javascript">//修改用户
+$(document).on(&quot;click&quot;,&quot;.edit_btn&quot;,function () {
+    //查出部门
+    getDepts(&quot;#empUpdateModal select&quot;);
+    //查出员工
+    getEmp($(this).attr(&quot;edit-id&quot;));
+    //把员工的信息传到模态框
+
+    $(&quot;#empUpdateModal&quot;).modal({
+        backdrop:&quot;static&quot;
+    });
+})
+</code></pre>
+
+<p>在显示员工数据函数 build_emps_table 为编辑按钮添加 id</p>
+
+<pre><code class="language-javascript">editBtn.attr(&quot;edit-id&quot;,item.empId);
+
+</code></pre>
+
+<p>根据Id查询出员工数据</p>
+
+<pre><code class="language-javascript">function getEmp(id) {
+    $.ajax({
+        url:&quot;${APP_PATH}/emp/&quot;+id,
+        type:&quot;GET&quot;,
+        success:function (result) {
+            var empData = result.extend.emp;
+            $(&quot;#empName_update_static&quot;).text(empData.empName);
+            $(&quot;#email_update_input&quot;).val(empData.email);
+            $(&quot;#empUpdateModal input[name=gender]&quot;).val([empData.gender]);
+            $(&quot;#empUpdateModal select&quot;).val([empData.dId]);
+        }
+    })
+}
+
+</code></pre>
+
+<h3 id="6-员工删除">6.员工删除</h3>
+
+<h4 id="1-单个删除">1.单个删除</h4>
+
+<h5 id="1-jsp">1.jsp</h5>
+
+<p>为删除按钮添加属性</p>
+
+<pre><code class="language-javascript">//为删除按钮添加一个自定义属性，表示当前的员工id
+var delBtn = $(&quot;&lt;button&gt;&lt;/button&gt;&quot;).addClass(&quot;btn btn-danger btn-sm delete_btn&quot;)
+
+</code></pre>
+
+<p>动态效果</p>
+
+<pre><code class="language-javascript"> //单个删除
+    $(document).on(&quot;click&quot;,&quot;.delete_btn&quot;,function () {
+//        1.弹出是否删除对话框
+        var empname = $(this).parents(&quot;tr&quot;).find(&quot;td:eq(2)&quot;).text();
+        var empId = $(this).attr(&quot;del-id&quot;);
+        if(confirm(&quot;确定删除[&quot;+empname+&quot;]吗？&quot;)){
+            $.ajax({
+                url:&quot;${APP_PATH}/emp/&quot;+empId,
+                type:&quot;DELETE&quot;,
+                success:function (result) {
+                    alert(result.msg);
+                    to_page(currentPage);
+                }
+            })
+        }
+    })
+
+</code></pre>
+
+<h5 id="2-controller">2.controller</h5>
+
+<pre><code class="language-java">//删除员工
+@ResponseBody
+@RequestMapping(value = &quot;/emp/{id}&quot;,method = RequestMethod.DELETE)
+public Msg deleteEmp(@PathVariable(&quot;id&quot;)Integer id){
+   employeeService.deleEmp(id);
+   return Msg.success();
+}
+
+</code></pre>
+
+<h5 id="3-service">3.service</h5>
+
+<pre><code class="language-java">/**
+ * 删除员工
+ * @param id 员工id
+ */
+public void deleEmp(Integer id) {
+    employeeMapper.deleteByPrimaryKey(id);
+}
+
+</code></pre>
+
+<h4 id="2-多个删除">2.多个删除</h4>
+
+<h5 id="1-index">1.index</h5>
+
+<h6 id="1-全选按钮">1.全选按钮</h6>
+
+<pre><code class="language-javascript"> //完成全选/全部选功能
+    $(&quot;#check_all&quot;).click(function () {
+        //attr获取checked是undefined;
+        //我们这些dom原生的属性；attr获取自定义属性的值；
+        //prop修改和读取dom原生属性的值
+        $(&quot;.check_item&quot;).prop(&quot;checked&quot;,$(this).prop(&quot;checked&quot;));
+    });
+
+    //当所有单选选的时候 全选也选上
+    $(document).on(&quot;click&quot;,&quot;check_item&quot;,function () {
+//        判断当前选中的元素是否为全选
+        var flag = $(&quot;.check_item:checked&quot;).length==$(&quot;.check_item&quot;).length;
+        $(&quot;#check_all&quot;).prop(&quot;checked&quot;,flag);
+    })
+
+</code></pre>
+
+<h6 id="2-删除多选">2.删除多选</h6>
+
+<pre><code class="language-javascript">//点击全部删除就全删除
+$(&quot;#emp_delete_all_btn&quot;).click(function () {
+    var empNames = &quot;&quot;;
+    var del_idstr = &quot;&quot;;
+    $.each($(&quot;.check_item:checked&quot;),function () {
+        empNames += $(this).parents(&quot;tr&quot;).find(&quot;td:eq(2)&quot;).text()+&quot;,&quot;;
+        del_idstr += $(this).parents(&quot;tr&quot;).find(&quot;td:eq(1)&quot;).text()+&quot;-&quot;;
+    })
+    empNames = empNames.substring(0,empNames.length-1);
+    del_idstr = del_idstr.substring(0, del_idstr.length-1);
+    if(confirm(&quot;确定删除[&quot;+empNames+&quot;]吗？&quot;)){
+        $.ajax({
+            url:&quot;${APP_PATH}/emp/&quot;+del_idstr,
+            type:&quot;DELETE&quot;,
+            success:function (result) {
+                alert(result.msg);
+                to_page(currentPage)
+            }
+        });
+    }
+})
+
+</code></pre>
+
+<h5 id="2-controller-1">2.controller</h5>
+
+<pre><code class="language-java">//删除员工
+@ResponseBody
+@RequestMapping(value = &quot;/emp/{ids}&quot;,method = RequestMethod.DELETE)
+public Msg deleteEmp(@PathVariable(&quot;ids&quot;)String ids) {
+   if (ids.contains(&quot;-&quot;)) {
+      List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+      String[] str_ids = ids.split(&quot;-&quot;);
+      for (String string : str_ids) {
+         list.add(Integer.parseInt(string));
+      }
+      employeeService.deleteBatch(list);
+   } else {
+      Integer id = Integer.parseInt(ids);
+      employeeService.deleEmp(id);
+
+   }
+   return Msg.success();
+}
+
+</code></pre>
+
+<h5 id="3-service-1">3.service</h5>
+
+<pre><code class="language-java">/**
+ * 删除多个员工
+ * @param list 选中的id
+ */
+public void deleteBatch(List&lt;Integer&gt; list) {
+    EmployeeExample example = new EmployeeExample();
+    EmployeeExample.Criteria criteria = example.createCriteria();
+    criteria.andEmpIdIn(list);
+    employeeMapper.deleteByExample(example);
+}
+
+</code></pre>
+</article>
+    <footer class="post-footer">
+      
+      <div class="sharing">
+        <a class="share share-facebook" target="_blank" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fLhengXu.github.io%2fpost%2fssmcrud%2f" title="Share on Facebook">
+          <svg class="icon icon-facebook" fill="currentColor"><use xlink:href="#icon-facebook" /></svg>
+        </a>
+        <a class="share share-twitter" target="_blank" href="https://twitter.com/intent/tweet/?text=Blog&amp;url=https%3a%2f%2fLhengXu.github.io%2fpost%2fssmcrud%2f" title="Share on Twitter">
+          <svg class="icon icon-twitter" fill="currentColor"><use xlink:href="#icon-twitter" /></svg>
+        </a>
+        <a class="share share-google" target="_blank" href="https://plus.google.com/share?url=Blog&amp;url=https%3a%2f%2fLhengXu.github.io%2fpost%2fssmcrud%2f" title="Share on Google+">
+          <svg class="icon icon-google" fill="currentColor"><use xlink:href="#icon-googleplus" /></svg>
+        </a>
+      </div>
+    </footer>
+  </section>
+
+    <footer class="footer">
+  <p>Copyright © 2018-2019 My New Hugo Site</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/huyb1991/hugo-lamp" title="Hugo LAMP" target="_blank">LAMP</a>.</p>
+</footer>
+
+
+
+
+
+
+  </body>
+</html>
